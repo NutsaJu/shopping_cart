@@ -11,6 +11,7 @@ import {
 import { Button } from "react-bootstrap";
 import styled from "styled-components";
 import searchIcon from "../assets/search.png";
+import { useTranslation } from "react-i18next";
 
 const StorePage = () => {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -21,7 +22,8 @@ const StorePage = () => {
   const { data: search_Products } = useGetSearchedProductsQuery(searchValue, {
     skip: !searchValue && true,
   });
-  
+  const {t} = useTranslation()
+
   return (
     <>
       {isLoading ? (
@@ -74,7 +76,7 @@ const StorePage = () => {
             }
             className="mt-1 mb-2"
           >
-            More Items
+            {t("more")}
           </Button>
         </Container>
       )}
