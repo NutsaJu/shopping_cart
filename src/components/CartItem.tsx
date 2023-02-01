@@ -83,6 +83,7 @@ const TextWrapper = styled.div`
   justify-content: space-around;
   display: flex;
   flex-direction: column;
+  padding: 10px;
 `;
 const QuantityWrapper = styled.div`
   width: 100%;
