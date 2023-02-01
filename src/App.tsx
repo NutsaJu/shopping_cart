@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import SingleProductPage from "./pages/SingleProductPage";
 import StorePage from "./pages/StorePage";
+import './i18n'
 
 function App() {
   return (

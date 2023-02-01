@@ -5,12 +5,14 @@ import { NavLink } from "react-router-dom";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import CartItem from "../components/CartItem";
 import { useGetAllProductsQuery } from "../features/apiSlice";
+import { useTranslation } from "react-i18next";
 
 const CartPage = () => {
   const { cartItems, cartQuantity } = useShoppingCart();
   const { data: allProducts } = useGetAllProductsQuery({
     skip: !cartQuantity && true,
   });
+  const {t} = useTranslation()
 
   return (
     <>
@@ -22,7 +24,7 @@ const CartPage = () => {
             ))}
           </CartItemsWrapper>
           <TotalPriceWrapper>
-            <h2>Total:</h2>
+            <h4>{t("total")}</h4>
             <span className="text-danger fs-3 ms-auto">
               ${" "}
               {cartItems.reduce((total, cartItem) => {
@@ -33,7 +35,7 @@ const CartPage = () => {
               }, 0)}
             </span>
             <Button className="w-100" variant="outline-success">
-              Checkout
+              {t("checkout")}
             </Button>
           </TotalPriceWrapper>
         </Container>
@@ -44,10 +46,10 @@ const CartPage = () => {
               src={emptyCart}
               style={{ width: "100%", height: "100%", objectFit: "scale-down" }}
             />
-            <h3>Your Cart is empty</h3>
-            <p>Looks like you haven't made your choice yet</p>
+            <h3>{t("cartIsEmpty")}</h3>
+            <p>{t("haven't_made_choice")}</p>
             <NavLink to="/">
-              <Button>Shop Now</Button>
+              <Button>{t("shopNow")}</Button>
             </NavLink>
           </Wrapper>
         </Container>

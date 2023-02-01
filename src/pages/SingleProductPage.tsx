@@ -8,6 +8,9 @@ import {
 import { useState } from "react";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import StoreItem from "../components/StoreItem";
+import { useTranslation } from "react-i18next";
+import Rating from "@mui/material/Rating";
+import StarIcon from "@mui/icons-material/Star";
 
 const SingleProductPage = () => {
   //  for single Product
@@ -33,6 +36,7 @@ const SingleProductPage = () => {
   const quantity = getItemQuantity(singleProduct?.id);
   const [index, setIndex] = useState<number>(0);
   const imgCounter: number = singleProduct?.images?.length;
+  const { t } = useTranslation();
 
   return (
     <>
@@ -61,7 +65,15 @@ const SingleProductPage = () => {
               <h5 className="text-muted">{singleProduct.brand}</h5>
               <p>{singleProduct.description}</p>
               <div className="d-flex justify-content-between align-items-center mb-4">
-                <RatingCircle>{singleProduct.rating}</RatingCircle>
+                <Rating
+                  name="text-feedback"
+                  value={singleProduct.rating}
+                  readOnly
+                  precision={0.5}
+                  emptyIcon={
+                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                  }
+                />
                 <h5 className="text-primary">${singleProduct.price}</h5>
               </div>
               {quantity === 0 ? (
@@ -69,7 +81,7 @@ const SingleProductPage = () => {
                   className="w-100"
                   onClick={() => increaseItemQuantity(singleProduct.id)}
                 >
-                  +Add to Cart
+                  {t("add to cart")}
                 </Button>
               ) : (
                 <div
@@ -87,7 +99,7 @@ const SingleProductPage = () => {
                     </Button>
                     <div>
                       <span className="fs-3">{quantity}</span>
-                      in a cart
+                      {t("in a cart")}
                     </div>
                     <Button
                       onClick={() => increaseItemQuantity(singleProduct.id)}
@@ -100,7 +112,7 @@ const SingleProductPage = () => {
                     variant="danger"
                     onClick={() => removeItem(singleProduct.id)}
                   >
-                    remove
+                    {t("remove")}
                   </Button>
                 </div>
               )}
@@ -110,11 +122,11 @@ const SingleProductPage = () => {
             <Spinner animation="border" variant="primary" />
           ) : (
             <RelatedWrapper>
-              <h4 className="mb-3" >Related Products</h4>
+              <h4 className="mb-3">{t("relatedProducts")}</h4>
               <Row md={2} xs={1} lg={4} className="g-3 mb-2">
                 {category_Products?.products?.map((item: any) => (
                   <Col key={item.id}>
-                    <StoreItem {...item}/>
+                    <StoreItem {...item} />
                   </Col>
                 ))}
               </Row>
@@ -171,21 +183,9 @@ const DetailsWrapper = styled.div`
   max-width: 500px;
   width: 100%;
 `;
-const RatingCircle = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  background-color: #d89f0f;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  color: white;
-`;
-
 const RelatedWrapper = styled.div`
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   padding: 40px;
-  `
+`;

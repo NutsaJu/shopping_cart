@@ -36,7 +36,6 @@ const StorePage = () => {
           <SearchWrapper>
             <Input
               value={searchValue || ""}
-              placeholder="search item"
               type="text"
               onChange={(e) => setSearchValue(e.target.value)}
             />

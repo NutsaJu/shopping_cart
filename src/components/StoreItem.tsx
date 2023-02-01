@@ -1,4 +1,5 @@
 import { Card, Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 
@@ -18,6 +19,7 @@ const StoreItem = ({ id, title, price, images, stock }: StoreItemProps) => {
     removeItem,
   } = useShoppingCart();
   const quantity = getItemQuantity(id);
+  const {t} = useTranslation()
   return (
     <Card style={{ height: "310px", border: "none"}}>
       <NavLink to={`/product/${id}`}>
@@ -39,7 +41,7 @@ const StoreItem = ({ id, title, price, images, stock }: StoreItemProps) => {
         </Card.Title>
         {quantity === 0 ? (
           <Button className="w-100" onClick={() => increaseItemQuantity(id)}>
-            +Add to Cart
+            {t("add to cart")}
           </Button>
         ) : (
           <div
@@ -53,12 +55,12 @@ const StoreItem = ({ id, title, price, images, stock }: StoreItemProps) => {
               <Button onClick={() => decreaseItemQuantity(id)}>-</Button>
               <div>
                 <span className="fs-3">{quantity}</span>
-                in a cart
+                {t("in a cart")}
               </div>
               <Button onClick={() => increaseItemQuantity(id)} disabled={ quantity >= stock ? true : false}>+</Button>
             </div>
             <Button variant="danger" onClick={() => removeItem(id)}>
-              remove
+              {t("remove")}
             </Button>
           </div>
         )}
