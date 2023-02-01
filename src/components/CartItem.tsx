@@ -19,6 +19,7 @@ const CartItem = ({ id, quantity}: CartItemProps) => {
 
   const item = allProducts?.products?.find((i: any) => i.id === id);
 
+
   if (item == null) return null;
   return (
     <>
