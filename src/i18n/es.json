@@ -1,0 +1,15 @@
+{
+    "store" : "Store",
+    "cart" : "Cart",
+    "add to cart": " + Add To Cart",
+    "in a cart" : "in a cart",
+    "remove" : "Remove",
+    "total" : "Total : ",
+    "relatedProducts": "Related Products",
+    "cartIsEmpty": "Your Cart is empty",
+    "haven't_made_choice": "Looks like you haven't made your choice yet",
+    "shopNow": "Shop Now",
+    "lang" : "lang",
+    "checkout": "Checkout",
+    "more": "More Items"
+}
